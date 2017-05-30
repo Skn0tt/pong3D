@@ -108,11 +108,6 @@ public class Gui extends javax.swing.JFrame {
                 radioHostStateChanged(evt);
             }
         });
-        radioHost.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioHostActionPerformed(evt);
-            }
-        });
 
         buttonGroup1.add(radioClient);
         radioClient.setText("Client");
@@ -170,23 +165,14 @@ public class Gui extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void radioHostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioHostActionPerformed
+    private void btnVerbindenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerbindenActionPerformed
         if (radioHost.isSelected()) {
             main.createServer(Integer.parseInt(txtPort.getText()));
-        
         }
         if (radioClient.isSelected()) {
             main.createClient(txtIp.getText(), Integer.parseInt(txtPort.getText()));
         }
-    }//GEN-LAST:event_radioHostActionPerformed
-
-    private void btnVerbindenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerbindenActionPerformed
-       
-        
-
-
-// TODO add your handling code here:
-    }//GEN-LAST:event_btnVerbindenActionPerformed
+    }
 
     private void radioHostStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_radioHostStateChanged
         // TODO add your handling code here:
