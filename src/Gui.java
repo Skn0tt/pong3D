@@ -170,7 +170,7 @@ public class Gui extends javax.swing.JFrame {
 
     private void radioHostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioHostActionPerformed
         if (radioHost.isSelected()) {
-            //Main.createServer(Integer.parseInt(txtPort.getText());
+            Main.createServer(Integer.parseInt(txtPort.getText());
         
         }
         if (radioClient.isSelected()) {
