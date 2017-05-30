@@ -9,13 +9,21 @@ public class MyClient extends Client{
   @Override
   public void processMessage(String msg){
     String[] s = msg.split(";");
-    main.setPuck(Double.parseDouble(s[0]), Double.parseDouble(s[1]));
-    main.setServer(Double.parseDouble(s[2]));
-    main.setClient(Double.parseDouble(s[3]));
+
+    switch(s[0]) {
+      case "0":
+        main.setPuck(Double.parseDouble(s[1]), Double.parseDouble(s[4]));
+        main.setServer(Double.parseDouble(s[3]));
+        main.setClient(Double.parseDouble(s[4]));
+        break;
+      case "1":
+        main.startGame();
+        break;
+    }
   }
 
   void sendPos(){
-    String s = main.puckX + ";" + main.puckZ + ";" + main.serverX + ";" + main.clientX;
+    String s = "0;" + main.puckX + ";" + main.puckZ + ";" + main.serverX + ";" + main.clientX;
     send(s);
   }
 }
