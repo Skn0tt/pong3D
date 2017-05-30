@@ -16,9 +16,11 @@ public class Main {
   static Game game;
 
   //TODO:GUI @Benedikt
+  Gui gui;
 
   public Main() {
     game = new Game(this);
+    gui = new Gui(this);
   }
 
   //Server erzeugen
