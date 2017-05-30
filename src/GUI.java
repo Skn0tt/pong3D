@@ -115,7 +115,7 @@ public class GUI extends javax.swing.JFrame {
         });
         radioHost.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioHostActionPerformed(evt);
+                //radioHostActionPerformed(evt);
             }
         });
 
@@ -205,7 +205,7 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_radioClientStateChanged
 
     private void btnStartenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartenActionPerformed
-       //TODO
+       main.startGame();
     }//GEN-LAST:event_btnStartenActionPerformed
 
     private String getIp() throws UnknownHostException {

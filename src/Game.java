@@ -17,6 +17,8 @@ public class Game implements KeyListener{
     GLQuader opponent;
     GLZylinder puck;
 
+    GLTastatur tastatur;
+
     public Game(Main main){
         this.main = main;
 
@@ -45,24 +47,22 @@ public class Game implements KeyListener{
 
 
     @Override
-    public void keyTyped(KeyEvent e) {
-
-    }
+    public void keyTyped(KeyEvent e) {}
 
     @Override
     public void keyPressed(KeyEvent e) {
-        switch (e.getKeyChar()){
-            case 'a':
+        switch (e.getKeyCode()){
+            case KeyEvent.VK_LEFT:
                 main.move(-1);
                 break;
-            case 'd':
+            case KeyEvent.VK_RIGHT:
                 main.move(1);
                 break;
+            default:
+                main.move(1);
         }
     }
 
     @Override
-    public void keyReleased(KeyEvent e) {
-
-    }
+    public void keyReleased(KeyEvent e) {}
 }
