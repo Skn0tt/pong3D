@@ -21,6 +21,7 @@ public class Main {
   public Main() {
     game = new Game(this);
     gui = new Gui(this);
+    gui.setVisible(true);
   }
 
   //Server erzeugen
