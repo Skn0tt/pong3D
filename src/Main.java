@@ -16,11 +16,11 @@ public class Main {
   static Game game;
 
   //TODO:GUI @Benedikt
-  Gui gui;
+  GUI gui;
 
   public Main() {
     //game = new Game(this);
-    gui = new Gui(this);
+    gui = new GUI(this);
     gui.setVisible(true);
   }
 
