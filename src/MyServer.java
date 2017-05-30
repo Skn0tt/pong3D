@@ -8,7 +8,7 @@ public class MyServer extends Server{
 
   @Override
   public void processNewConnection(String clientIP, int clientPort){
-    //TODO: New Connection Handler
+    main.gui.setConnection(true);
   }
 
   @Override
@@ -18,7 +18,7 @@ public class MyServer extends Server{
 
   @Override
   public void processClosingConnection(String clientIP, int clientPort){
-    //TODO: Close Connection Handler
+    main.gui.setConnection(false);
   }
 
 }

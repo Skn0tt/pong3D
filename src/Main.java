@@ -19,7 +19,7 @@ public class Main {
   Gui gui;
 
   public Main() {
-    game = new Game(this);
+    //game = new Game(this);
     gui = new Gui(this);
     gui.setVisible(true);
   }

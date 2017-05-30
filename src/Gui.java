@@ -213,12 +213,12 @@ public class Gui extends javax.swing.JFrame {
     return ip.toString();
     } 
     
-    public void ConnectionChanged(boolean verbunden){
-    if(verbunden== true){
+    public void setConnection(boolean verbunden){
+    if(verbunden){
     lblVerbunden.setText("Verbunden");
     
     }
-    if(verbunden == false){
+    if(!verbunden){
     lblVerbunden.setText("Nicht verbunden");
     }
     
