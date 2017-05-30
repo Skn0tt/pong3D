@@ -9,14 +9,22 @@ public class MyServer extends Server{
   @Override
   public void processNewConnection(String clientIP, int clientPort){
     main.gui.setConnection(true);
+
+    String s = "2;" + main.gui.getIp();
+    send(clientIP, clientPort, s);
   }
 
   @Override
   public void processMessage(String clientIP, int clientPort, String msg){
     String[] s = msg.split(";");
-    main.setPuck(Double.parseDouble(s[0]), Double.parseDouble(s[1]));
-    main.setServer(Double.parseDouble(s[2]));
-    main.setClient(Double.parseDouble(s[3]));
+
+    switch (s[0]) {
+      case "0":
+        main.setPuck(Double.parseDouble(s[0]), Double.parseDouble(s[1]));
+        main.setServer(Double.parseDouble(s[2]));
+        main.setClient(Double.parseDouble(s[3]));
+        break;
+    }
   }
 
   @Override
@@ -25,8 +33,12 @@ public class MyServer extends Server{
   }
 
   void sendPos(){
-    String s = main.puckX + ";" + main.puckZ + ";" + main.serverX + ";" + main.clientX;
+    String s = "0;" + main.puckX + ";" + main.puckZ + ";" + main.serverX + ";" + main.clientX;
     sendToAll(s);
+  }
+
+  void sendStart(){
+    sendToAll("1;");
   }
 
 }

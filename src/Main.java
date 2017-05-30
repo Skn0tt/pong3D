@@ -15,7 +15,7 @@ public class Main {
   //Game
   static Game game;
 
-  //TODO:GUI @Benedikt
+  //GUI
   GUI gui;
 
   public Main() {
@@ -63,6 +63,8 @@ public class Main {
     else{
       setClient(clientX + x);
     }
+
+    publishPositions();
   }
 
   void publishPositions(){
@@ -76,5 +78,7 @@ public class Main {
 
   void startGame(){
     game = new Game(this);
+    server.sendStart();
+    move(100);
   }
 }

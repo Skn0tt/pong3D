@@ -8,6 +8,7 @@
  *
  * @author Benedikt
  */
+import java.awt.*;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.logging.Level;
@@ -59,10 +60,6 @@ public class GUI extends javax.swing.JFrame {
         lblIp.setText("IP Adresse");
 
         lblPort.setText("Port");
-
-        txtIp.setText("IP Addresse");
-
-        txtPort.setText("Port");
 
         btnVerbinden.setText("Verbinden");
         btnVerbinden.addActionListener(new java.awt.event.ActionListener() {
@@ -185,45 +182,54 @@ public class GUI extends javax.swing.JFrame {
     }
 
     private void radioHostStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_radioHostStateChanged
-        // TODO add your handling code here:
-        if(radioHost.isSelected()) {
-        txtIp.setEditable(false);    
-        try {    
-            txtIp.setText(getIp());
-            } catch (UnknownHostException ex) {
-                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        
+        if (radioHost.isSelected()) modeHost();
+        else modeClient();
     }//GEN-LAST:event_radioHostStateChanged
 
     private void radioClientStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_radioClientStateChanged
-       if (radioHost.isSelected()) {
-       txtIp.setEditable(true);
-       txtIp.setText("IP Adresse");
-       }
+       if (radioHost.isSelected()) modeHost();
+       else modeClient();
     }//GEN-LAST:event_radioClientStateChanged
 
     private void btnStartenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartenActionPerformed
        main.startGame();
     }//GEN-LAST:event_btnStartenActionPerformed
 
-    private String getIp() throws UnknownHostException {
-    InetAddress ip = InetAddress.getLocalHost();
-    return ip.toString();
+    protected String getIp(){
+        String ip = "Error: No IP Found";
+        try {
+            ip = InetAddress.getLocalHost().toString();
+        } catch (UnknownHostException ex){}
+
+        ip = ip.split("/")[1];
+        return ip;
     } 
     
     public void setConnection(boolean verbunden){
-    if(verbunden){
-    lblVerbunden.setText("Verbunden");
-    
+        if(verbunden) lblVerbunden.setText("Verbunden");
+        else lblVerbunden.setText("Nicht verbunden");
     }
-    if(!verbunden){
-    lblVerbunden.setText("Nicht verbunden");
+
+    void modeClient(){
+        txtIp.setEditable(true);
+        txtIp.setEnabled(true);
+        txtIp.setText("");
+        btnVerbinden.setText("Verbinden");
+        btnStarten.setEnabled(false);
     }
-    
+
+    void modeHost(){
+        txtIp.setEditable(false);
+        txtIp.setEnabled(false);
+        txtIp.setText(getIp());
+        btnVerbinden.setText("Server Start");
+        btnStarten.setEnabled(true);
     }
-    
+
+    void setVerbunden(boolean b, String ip){
+        if (b) lblVerbunden.setText("Verbunden mit " + ip);
+        else lblVerbunden.setText("Nicht Verbunden");
+    }
     
     /**
      * @param args the command line arguments
