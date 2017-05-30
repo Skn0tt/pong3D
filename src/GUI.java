@@ -48,6 +48,11 @@ public class GUI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btnStarten.setText("Starten");
+        btnStarten.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStartenActionPerformed(evt);
+            }
+        });
 
         panelEingabe.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -108,6 +113,11 @@ public class GUI extends javax.swing.JFrame {
                 radioHostStateChanged(evt);
             }
         });
+        radioHost.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioHostActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(radioClient);
         radioClient.setText("Client");
@@ -165,7 +175,7 @@ public class GUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnVerbindenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerbindenActionPerformed
+    private void btnVerbindenActionPerformed(java.awt.event.ActionEvent evt) {                                             
         if (radioHost.isSelected()) {
             main.createServer(Integer.parseInt(txtPort.getText()));
         }
@@ -193,6 +203,10 @@ public class GUI extends javax.swing.JFrame {
        txtIp.setText("IP Adresse");
        }
     }//GEN-LAST:event_radioClientStateChanged
+
+    private void btnStartenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartenActionPerformed
+       //TODO
+    }//GEN-LAST:event_btnStartenActionPerformed
 
     private String getIp() throws UnknownHostException {
     InetAddress ip = InetAddress.getLocalHost();
