@@ -1,7 +1,7 @@
 public class Main {
   //Netzwerk
-  static MyClient client;
-  static MyServer server;
+  MyClient client;
+  MyServer server;
   boolean attServer; //Server/client?
   String attIP;
   int attPort;
@@ -9,8 +9,8 @@ public class Main {
   //Gloop-Koordinaten
   double puckX;
   double puckZ;
-  double opponentX;
-  double selfX;
+  double serverX;
+  double clientX;
 
   //Game
   static Game game;
@@ -39,16 +39,30 @@ public class Main {
   }
 
   //Get-Set Gloop
-  void setPuck(double x, double y){
+  void setPuck(double x, double z){
     //TODO: Überprüfung XY
+    this.puckX = x;
+    this.puckZ = z;
+    game.refreshPos();
   }
 
-  void setOpponent(double x){
-    if (x > -100 && x < 100) this.opponentX = x;
+  void setServer(double x){
+    if (x > -100 && x < 100) this.serverX = x;
+    game.refreshPos();
   }
 
-  void setSelf(double x){
-    if(x > -100 && x < 100) this.selfX = x;
+  void setClient(double x){
+    if(x > -100 && x < 100) this.clientX = x;
+    game.refreshPos();
+  }
+
+  void publishPositions(){
+    if (attServer){
+      server.sendPos();
+    }
+    else{
+      client.sendPos();
+    }
   }
 
   void startGame(){

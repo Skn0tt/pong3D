@@ -1,5 +1,9 @@
 import GLOOP.*;
-public class Game{
+
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+public class Game implements KeyListener{
     Main main;
 
     //Welt
@@ -34,8 +38,24 @@ public class Game{
     }
 
     public void refreshPos(){
-        self.setzePosition(main.selfX, self.gibY(), self.gibZ());
-        opponent.setzePosition(main.opponentX, opponent.gibY(), opponent.gibZ());
+        self.setzePosition(main.clientX, self.gibY(), self.gibZ());
+        opponent.setzePosition(main.serverX, opponent.gibY(), opponent.gibZ());
         puck.setzePosition(main.puckX, puck.gibY(), main.puckZ);
+    }
+
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        //if (e.getKeyChar() == 'a')
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
     }
 }
