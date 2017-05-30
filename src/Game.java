@@ -2,6 +2,7 @@ import GLOOP.*;
 public class Game{
     Main main;
 
+<<<<<<< HEAD
     //Welt
     GLKamera kamera;
     GLLicht licht;
@@ -31,6 +32,14 @@ public class Game{
         this.self = new GLQuader(0, 0, -100, 20, 10, 20);
         this.opponent = new GLQuader(0, 0, 100, 20, 10, 20);
         this.puck = new GLZylinder(0,0,0,10,20);
+=======
+    GLQuader self;
+    GLQuader opponent;
+    GLQuader puck;
+
+    public Game(Main main){
+        this.main = main;
+>>>>>>> master
     }
 
     public void refreshPos(){
