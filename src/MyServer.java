@@ -1,27 +1,24 @@
 public class MyServer extends Server{
-  double x;
-  double z;
+  Main main;
 
-  public MyServer(int port){
+  public MyServer(int port, Main main){
     super(port);
+    this.main = main;
   }
 
   @Override
   public void processNewConnection(String clientIP, int clientPort){
-    System.out.println("Funkt");
+    //TODO: New Connection Handler
   }
 
   @Override
   public void processMessage(String clientIP, int clientPort, String msg){
-    System.out.println(msg);
-
-    String[] values = msg.split(";");
-
-    x = Double.parseDouble(values[0]);
-    z = Double.parseDouble(values[1]);
+    //TODO: MSGHandler
   }
 
   @Override
-  public void processClosingConnection(String clientIP, int clientPort){}
+  public void processClosingConnection(String clientIP, int clientPort){
+    //TODO: Close Connection Handler
+  }
 
 }
