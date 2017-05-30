@@ -27,10 +27,10 @@ public class Game{
         initGL();
     }
 
-    public void initGL(){
+    public void initGL() {
         this.self = new GLQuader(0, 0, -100, 20, 10, 20);
         this.opponent = new GLQuader(0, 0, 100, 20, 10, 20);
-        this.puck = new GLZylinder(0,0,0,10,20);
+        this.puck = new GLZylinder(0, 0, 0, 10, 20);
     }
 
     public void refreshPos(){

@@ -12,10 +12,13 @@ public class Main {
   double opponentX;
   double selfX;
 
+  //Game
+  static Game game;
+
   //TODO:GUI @Benedikt
 
-  public static void main(String[] args) {
-
+  public Main() {
+    game = new Game(this);
   }
 
   //Server erzeugen
