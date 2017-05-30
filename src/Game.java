@@ -51,7 +51,14 @@ public class Game implements KeyListener{
 
     @Override
     public void keyPressed(KeyEvent e) {
-        //if (e.getKeyChar() == 'a')
+        switch (e.getKeyChar()){
+            case 'a':
+                main.move(-1);
+                break;
+            case 'd':
+                main.move(1);
+                break;
+        }
     }
 
     @Override

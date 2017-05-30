@@ -56,6 +56,15 @@ public class Main {
     game.refreshPos();
   }
 
+  void move(double x){
+    if (attServer){
+      setServer(serverX + x);
+    }
+    else{
+      setClient(clientX + x);
+    }
+  }
+
   void publishPositions(){
     if (attServer){
       server.sendPos();
