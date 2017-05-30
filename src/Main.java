@@ -16,11 +16,10 @@ public class Main {
   static Game game;
 
   //TODO:GUI @Benedikt
-  Gui gui;
+  GUI gui;
 
   public Main() {
-    //game = new Game(this);
-    gui = new Gui(this);
+    gui = new GUI(this);
     gui.setVisible(true);
   }
 
@@ -50,5 +49,9 @@ public class Main {
 
   void setSelf(double x){
     if(x > -100 && x < 100) this.selfX = x;
+  }
+
+  void startGame(){
+    game = new Game(this);
   }
 }
