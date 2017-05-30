@@ -4,11 +4,11 @@ public class Main {
   static MyServer server;
   boolean attServer; //Server/client?
   String attIP;
-  int port;
+  int attPort;
 
   //Gloop-Koordinaten
   double puckX;
-  double puckY;
+  double puckZ;
   double opponentX;
   double selfX;
 
@@ -39,12 +39,10 @@ public class Main {
   }
 
   void setOpponent(double x){
-    if (x > -100 && x < 100){
-      this.x = x;
-    }
+    if (x > -100 && x < 100) this.opponentX = x;
   }
 
   void setSelf(double x){
-
+    if(x > -100 && x < 100) this.selfX = x;
   }
 }
