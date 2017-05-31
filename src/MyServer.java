@@ -20,9 +20,9 @@ public class MyServer extends Server{
 
     switch (s[0]) {
       case "0":
-        main.setPuck(Double.parseDouble(s[0]), Double.parseDouble(s[1]));
-        main.setServer(Double.parseDouble(s[2]));
-        main.setClient(Double.parseDouble(s[3]));
+        main.setPuck(Double.parseDouble(s[1]), Double.parseDouble(s[2]));
+        main.setServer(Double.parseDouble(s[3]));
+        main.setClient(Double.parseDouble(s[4]));
         break;
     }
   }
