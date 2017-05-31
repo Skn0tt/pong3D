@@ -21,6 +21,7 @@ public class MyClient extends Client{
         break;
       case "2":
         main.gui.setVerbunden(true, s[1]);
+        break;
     }
   }
 

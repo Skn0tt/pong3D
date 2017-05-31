@@ -79,6 +79,6 @@ public class Main {
 
   void startGame(){
     game = new Game(this);
-    server.sendStart();
+    if (attServer) server.sendStart();
   }
 }

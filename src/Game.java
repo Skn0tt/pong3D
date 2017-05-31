@@ -42,8 +42,8 @@ public class Game{
     }
 
     public void refreshPos(){
-        server.setzePosition(main.clientX, server.gibY(), server.gibZ());
-        client.setzePosition(main.serverX, client.gibY(), client.gibZ());
+        server.setzePosition(main.serverX, server.gibY(), server.gibZ());
+        client.setzePosition(main.clientX, client.gibY(), client.gibZ());
         puck.setzePosition(main.puckX, puck.gibY(), main.puckZ);
     }
 }
