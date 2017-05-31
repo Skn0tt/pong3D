@@ -4,6 +4,7 @@ public class Game{
     Main main;
 
     GLTastatur tastatur;
+    Thread inputThread;
 
     //Welt
     GLKamera kamera;
@@ -27,16 +28,10 @@ public class Game{
         himmel = new GLHimmel("Bilder/Himmel.jpg");
         boden = new GLBoden("Bilder/Strasse.jpg");
 
-        tastatur = new GLTastatur();
-
         initGL();
 
-        new Thread(() -> {
-            while(true){
-                if (tastatur.oben()) main.move(10);
-                if (tastatur.unten()) main.move(-10);
-            }
-        }).start();
+        inputThread = new InputThread(main);
+        inputThread.start();
     }
 
     public void initGL() {

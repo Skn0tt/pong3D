@@ -5,6 +5,7 @@ public class Main {
   boolean attServer; //Server/client?
   String attIP;
   int attPort;
+  final static int STANDARD_PORT = 27014;
 
   //Gloop-Koordinaten
   double puckX;
@@ -13,7 +14,8 @@ public class Main {
   double clientX;
 
   //Game
-  static Game game;
+  Game game;
+  Thread inputThread;
 
   //GUI
   GUI gui;
@@ -79,6 +81,5 @@ public class Main {
   void startGame(){
     game = new Game(this);
     server.sendStart();
-    move(100);
   }
 }

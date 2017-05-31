@@ -192,7 +192,8 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_radioClientStateChanged
 
     private void btnStartenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartenActionPerformed
-       main.startGame();
+        if (main.server == null) main.createServer(main.STANDARD_PORT);
+        main.startGame();
     }//GEN-LAST:event_btnStartenActionPerformed
 
     protected String getIp(){
