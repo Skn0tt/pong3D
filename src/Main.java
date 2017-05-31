@@ -15,7 +15,6 @@ public class Main {
 
   //Game
   Game game;
-  Thread inputThread;
 
   //GUI
   GUI gui;

@@ -3,6 +3,7 @@ import GLOOP.*;
 public class Game{
     Main main;
 
+    //Input
     GLTastatur tastatur;
     Thread inputThread;
 
