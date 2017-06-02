@@ -8,6 +8,9 @@ import java.util.TimerTask;
  */
 
 public class InputThread extends Thread{
+    double sensitivity = 300;
+    int tickrate = 128;
+
     Main main;
 
     public InputThread(Main main){
@@ -21,9 +24,9 @@ public class InputThread extends Thread{
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                if (main.game.tastatur.oben()) main.move(10);
-                if (main.game.tastatur.unten()) main.move(-10);
+                if (main.game.tastatur.links()) main.move(sensitivity/tickrate);
+                if (main.game.tastatur.rechts()) main.move(sensitivity/tickrate * -1);
             }
-        },5, 5);
+        },1000/tickrate, 1000/tickrate);
     }
 }

@@ -1,8 +1,10 @@
+import com.sun.istack.internal.Nullable;
+
 public class Main {
   //Netzwerk
   MyClient client;
   MyServer server;
-  boolean attServer; //Server/client?
+  boolean attServer; //Server/paddleClient?
   String attIP;
   int attPort;
   final static int STANDARD_PORT = 27014;
@@ -77,8 +79,20 @@ public class Main {
     }
   }
 
-  void startGame(){
+  void startGame(double[] paddleForm){
     game = new Game(this);
-    if (attServer) server.sendStart();
+    if (attServer) {
+      game.setCamera(game.PSPCTV_SERVER_GAME);
+      game.setPaddle(paddleForm);
+      server.sendStart();
+    }
+    else{
+      game.setPaddle(paddleForm);
+      game.setCamera(game.PSPCTV_CLIENT_GAME);
+    }
+  }
+
+  void startGame() {
+    startGame(Game.PADDLE_A);
   }
 }
