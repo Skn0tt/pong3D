@@ -1,3 +1,4 @@
+import GLOOP.GLVektor;
 import com.sun.istack.internal.Nullable;
 
 public class Main {
@@ -14,6 +15,9 @@ public class Main {
   double puckZ;
   double serverX;
   double clientX;
+
+  GLVektor puckRichtung = new GLVektor(0,0,1);
+  double speed = 1;
 
   //Game
   Game game;
@@ -50,12 +54,12 @@ public class Main {
   }
 
   void setServer(double x){
-    if (x > -100 && x < 100) this.serverX = x;
+    if (x > Game.BREITE / 2 * -1 && x < Game.BREITE / 2) this.serverX = x;
     game.refreshPos();
   }
 
   void setClient(double x){
-    if(x > -100 && x < 100) this.clientX = x;
+    if(x > Game.BREITE / 2 * -1 && x < Game.BREITE / 2) this.clientX = x;
     game.refreshPos();
   }
 
@@ -70,6 +74,14 @@ public class Main {
     publishPositions();
   }
 
+  void movePuck(){
+    puckX += puckRichtung.x * speed;
+    puckZ += puckRichtung.z * speed;
+
+    game.refreshPos();
+    publishPositions();
+  }
+
   void publishPositions(){
     if (attServer){
       server.sendPos();
@@ -81,13 +93,13 @@ public class Main {
 
   void startGame(double[] paddleForm){
     game = new Game(this);
+    game.setPaddle(paddleForm);
+    game.start();
     if (attServer) {
       game.setCamera(game.PSPCTV_SERVER_GAME);
-      game.setPaddle(paddleForm);
       server.sendStart();
     }
     else{
-      game.setPaddle(paddleForm);
       game.setCamera(game.PSPCTV_CLIENT_GAME);
     }
   }

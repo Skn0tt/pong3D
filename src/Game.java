@@ -23,16 +23,22 @@ public class Game{
 
     //Objekte Werte
     public static final double[] PADDLE_A = new double[]{
-        50, //Laenge X
+        100, //Laenge X
         10, //Laenge Y
         20 //Laenge Z
     };
+
+    //Spieleinstellungen
+    public static final double BREITE = 500;
 
     Main main;
 
     //Input
     GLTastatur tastatur;
     Thread inputThread;
+
+    //PuckMovement
+    PuckMovement puckMovement;
 
     //Welt
     GLKamera kamera;
@@ -46,7 +52,7 @@ public class Game{
     GLZylinder puck;
 
     //Einstellungen
-    double distance = 250;
+    double distance = 500;
 
     //Grundconstructor
     public Game(Main main){
@@ -57,13 +63,14 @@ public class Game{
         kamera.setzeBlickpunkt(0,0,0);
 
         licht = new GLLicht(-5000, 1000, -5000);
-        himmel = new GLHimmel("Bilder/Himmel.jpg");
-        boden = new GLBoden("Bilder/Strasse.jpg");
+        //himmel = new GLHimmel("Bilder/Skybox.png");
+        //boden = new GLBoden("Bilder/Boden.png");
 
         initGL();
 
         inputThread = new InputThread(main);
-        inputThread.start();
+
+        if (main.attServer) puckMovement = new PuckMovement(main);
     }
 
     //Constructor mit Perspektive
@@ -72,10 +79,16 @@ public class Game{
         setCamera(pspctv);
     }
 
+    public void start(){
+        inputThread.start();
+        if(puckMovement != null) puckMovement.start();
+    }
+
     public void initGL() {
         this.paddleServer = new GLQuader(0, 0, distance * -1, 20, 10, 20);
         this.paddleClient = new GLQuader(0,0,distance,20,10,20);
-        this.puck = new GLZylinder(0, 0, 0, 10, 20);
+        this.puck = new GLZylinder(0, 0, 0, 10, 8);
+        puck.drehe(90,0,0);
     }
 
     public void refreshPos(){
