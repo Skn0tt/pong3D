@@ -1,5 +1,4 @@
 import GLOOP.*;
-import com.sun.istack.internal.Nullable;
 
 public class Game{
     //Camera Perspektiven
@@ -13,9 +12,9 @@ public class Game{
     };
 
     public static final double[] PSPCTV_CLIENT_GAME = new double[]{
-            1000,  //Position X
+            0,  //Position X
             500,    //Position Y
-            0,      //Postion Z
+            1000,      //Postion Z
             0,      //Blickpunkt X
             0,      //Blickpunkt Y
             0,      //Blickpunkt Z
@@ -28,8 +27,12 @@ public class Game{
         20 //Laenge Z
     };
 
+    public static final double WAND_BREITE = 20;
+
+    public static final double PUCK_RADIUS = 10;
+
     //Spieleinstellungen
-    public static final double BREITE = 500;
+    public static final double BREITE = 400;
 
     Main main;
 
@@ -45,6 +48,8 @@ public class Game{
     GLLicht licht;
     GLHimmel himmel;
     GLBoden boden;
+    GLQuader wandLinks;
+    GLQuader wandRechts;
 
     //Spielobjekte
     GLQuader paddleServer;
@@ -53,6 +58,8 @@ public class Game{
 
     //Einstellungen
     double distance = 500;
+    double paddleWidth;
+    double paddleDepth;
 
     //Grundconstructor
     public Game(Main main){
@@ -62,7 +69,7 @@ public class Game{
         kamera.setzePosition(-1000, 450, 1000);
         kamera.setzeBlickpunkt(0,0,0);
 
-        licht = new GLLicht(-5000, 1000, -5000);
+        licht = new GLLicht(0, 1000, 0);
         //himmel = new GLHimmel("Bilder/Skybox.png");
         //boden = new GLBoden("Bilder/Boden.png");
 
@@ -87,14 +94,19 @@ public class Game{
     public void initGL() {
         this.paddleServer = new GLQuader(0, 0, distance * -1, 20, 10, 20);
         this.paddleClient = new GLQuader(0,0,distance,20,10,20);
-        this.puck = new GLZylinder(0, 0, 0, 10, 8);
+        this.puck = new GLZylinder(0, 0, 0, PUCK_RADIUS, 8);
         puck.drehe(90,0,0);
+
+        this.wandLinks = new GLQuader(BREITE * -1, 0, 0, WAND_BREITE, 10, distance * 2);
+        this.wandRechts = new GLQuader(BREITE, 0, 0, 10, WAND_BREITE, distance * 2);
     }
 
     public void refreshPos(){
         paddleServer.setzePosition(main.serverX, paddleServer.gibY(), paddleServer.gibZ());
         paddleClient.setzePosition(main.clientX, paddleClient.gibY(), paddleClient.gibZ());
         puck.setzePosition(main.puckX, puck.gibY(), main.puckZ);
+        wandLinks.setzePosition(BREITE * -1, 0,0);
+        wandRechts.setzePosition(BREITE, 0, 0);
     }
 
     public void setCamera(double[] coord){
@@ -110,6 +122,9 @@ public class Game{
 
         if (paddleServer != null) paddleServer.loesche();
         if (paddleClient != null) paddleClient.loesche();
+
+        paddleWidth = paddleData[0];
+        paddleDepth = paddleData[2];
 
         paddleServer = new GLQuader(0,0,distance * -1, paddleData[0], paddleData[1], paddleData[2]);
         paddleClient = new GLQuader(0,0,distance, paddleData[0], paddleData[1], paddleData[2]);

@@ -1,5 +1,4 @@
 import GLOOP.GLVektor;
-import com.sun.istack.internal.Nullable;
 
 public class Main {
   //Netzwerk
@@ -16,8 +15,8 @@ public class Main {
   double serverX;
   double clientX;
 
-  GLVektor puckRichtung = new GLVektor(0,0,1);
-  double speed = 1;
+  GLVektor puckRichtung = new GLVektor(Math.random() * 0.6,0,- 1);
+  double speed = 4;
 
   //Game
   Game game;
@@ -54,13 +53,19 @@ public class Main {
   }
 
   void setServer(double x){
-    if (x > Game.BREITE / 2 * -1 && x < Game.BREITE / 2) this.serverX = x;
-    game.refreshPos();
+    if (x > (Game.BREITE * -1) + (game.paddleWidth / 2) && x < (Game.BREITE) - (game.paddleWidth / 2)) {
+      this.serverX = x;
+      game.refreshPos();
+      publishPositions();
+    }
   }
 
   void setClient(double x){
-    if(x > Game.BREITE / 2 * -1 && x < Game.BREITE / 2) this.clientX = x;
-    game.refreshPos();
+    if (x > (Game.BREITE * -1) + (game.paddleWidth / 2) && x < (Game.BREITE) - (game.paddleWidth / 2)){
+      this.clientX = x;
+      game.refreshPos();
+      publishPositions();
+    }
   }
 
   void move(double x){
@@ -68,18 +73,41 @@ public class Main {
       setServer(serverX + x);
     }
     else{
-      setClient(clientX + x);
+      setClient(clientX + x * -1);
     }
-
-    publishPositions();
   }
 
   void movePuck(){
     puckX += puckRichtung.x * speed;
     puckZ += puckRichtung.z * speed;
 
+    checkCollision();
+
     game.refreshPos();
     publishPositions();
+  }
+
+  void checkCollision(){
+    if (Math.abs(puckZ) > game.distance - (game.paddleDepth / 2) - (Game.PUCK_RADIUS / 2)) {  //Prüft ob auf höhe der linie
+      if (puckZ > 0){ //Client Seite
+        if (puckX > (clientX - (game.paddleWidth/2)) && puckX < (clientX + (game.paddleWidth/2))) richtungFlipHorizontal(puckX-clientX); //Paddle Hit
+        else punktServer();
+      } else {  //Server Seite
+        if (puckX > (serverX - (game.paddleWidth/2)) && puckX < (serverX + (game.paddleWidth/2))) richtungFlipHorizontal(puckX-clientX); //Paddle Hit
+        else punktClient();
+      }
+    }
+    else if (Math.abs(puckX) > Game.BREITE - Game.WAND_BREITE / 2 - Game.PUCK_RADIUS) richtungFlipVertikal(); //Wall Hit
+  }
+
+  void richtungFlipHorizontal(double x){
+    puckRichtung.z = puckRichtung.gibZ() * -1;
+    System.out.println(x);
+  }
+
+  void richtungFlipVertikal(){
+    puckRichtung.x = puckRichtung.gibX() * -1;
+
   }
 
   void publishPositions(){
@@ -96,12 +124,22 @@ public class Main {
     game.setPaddle(paddleForm);
     game.start();
     if (attServer) {
-      game.setCamera(game.PSPCTV_SERVER_GAME);
+      game.setCamera(Game.PSPCTV_SERVER_GAME);
       server.sendStart();
     }
     else{
-      game.setCamera(game.PSPCTV_CLIENT_GAME);
+      game.setCamera(Game.PSPCTV_CLIENT_GAME);
     }
+  }
+
+  void punktServer(){
+    setPuck(0,0);
+    richtungFlipHorizontal(0);
+  }
+
+  void punktClient(){
+    setPuck(0,0);
+    richtungFlipHorizontal(0);
   }
 
   void startGame() {
