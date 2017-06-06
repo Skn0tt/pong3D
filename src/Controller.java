@@ -1,0 +1,30 @@
+//package sample;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+import javax.security.auth.login.Configuration;
+
+public class Controller extends Application{
+    private Stage primaryStage;
+    //Configuration configuration;
+
+    public Controller(){
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception{
+        this.primaryStage = primaryStage;
+        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        this.primaryStage.setTitle("Hello World");
+        this.primaryStage.setScene(new Scene(root, 300, 275));
+        this.primaryStage.show();
+    }
+
+    void show(){
+        launch();
+    }
+}

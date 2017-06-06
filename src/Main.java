@@ -25,8 +25,13 @@ public class Main {
   GUI gui;
 
   public Main() {
+    /*
     gui = new GUI(this);
     gui.setVisible(true);
+    */
+
+    Controller controller = new Controller();
+    controller.show();
   }
 
   //Server erzeugen
