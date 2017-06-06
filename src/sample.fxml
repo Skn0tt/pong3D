@@ -15,7 +15,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="639.0" prefWidth="849.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
    <children>
-      <JFXButton fx:id="btnStarten" layoutX="593.0" layoutY="504.0" prefHeight="92.0" prefWidth="211.0" style="-fx-background-color: #49AAC4;" text="Starten">
+      <JFXButton fx:id="btnStarten" layoutX="593.0" layoutY="504.0" onAction="#btnVerbindenActionPerformed" prefHeight="92.0" prefWidth="211.0" style="-fx-background-color: #49AAC4;" text="Starten">
          <font>
             <Font name="System Bold" size="26.0" />
          </font></JFXButton>
@@ -74,7 +74,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <JFXRadioButton layoutX="20.0" layoutY="56.0">
+            <JFXRadioButton fx:id="radioBtn1" layoutX="20.0" layoutY="56.0" onAction="#btn">
                <font>
                   <Font size="16.0" />
                </font>
@@ -82,12 +82,12 @@
                   <ToggleGroup fx:id="radioButtonMode" />
                </toggleGroup>
             </JFXRadioButton>
-            <JFXRadioButton layoutX="20.0" layoutY="80.0" toggleGroup="$radioButtonMode">
+            <JFXRadioButton fx:id="radioBtn2" layoutX="20.0" layoutY="80.0" toggleGroup="$radioButtonMode">
                <font>
                   <Font size="16.0" />
                </font>
             </JFXRadioButton>
-            <JFXRadioButton layoutX="20.0" layoutY="104.0" toggleGroup="$radioButtonMode">
+            <JFXRadioButton fx:id="radioBtn3" layoutX="20.0" layoutY="104.0" toggleGroup="$radioButtonMode">
                <font>
                   <Font size="16.0" />
                </font>
