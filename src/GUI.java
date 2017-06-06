@@ -215,7 +215,7 @@ public class GUI extends javax.swing.JFrame {
         txtIp.setEditable(true);
         txtIp.setEnabled(true);
         txtIp.setText("");
-        btnVerbinden.setText("Verbinden");
+        btnVerbinden.setText("GUI 2.0");
         btnStarten.setEnabled(false);
     }
 
