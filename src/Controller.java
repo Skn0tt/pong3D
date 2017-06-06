@@ -27,8 +27,12 @@ public class Controller extends Application{
     void show(){
         launch();
     }
+
     public void btnStartenActionPerformed() {
         System.out.println("Hallo Welt");
+    }
 
+    public void btnVerbindenActionPerformed() {
+        System.out.println("Hallo Welt");
     }
 }
