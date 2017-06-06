@@ -92,22 +92,33 @@ public class Main {
     publishPositions();
   }
 
-  void checkCollision(){
+  void checkCollision() {
     if (Math.abs(puckZ) > game.distance - (game.paddleDepth / 2) - (Game.PUCK_RADIUS / 2)) {  //Prüft ob auf höhe der linie
-      if (puckZ > 0){ //Client Seite
-        if (puckX > (clientX - (game.paddleWidth/2)) && puckX < (clientX + (game.paddleWidth/2))) richtungFlipHorizontal(puckX-clientX); //Paddle Hit
+      if (puckZ > 0) { //Client Seite
+        if (puckX > (clientX - (game.paddleWidth / 2)) && puckX < (clientX + (game.paddleWidth / 2)))
+          richtungFlipHorizontal(puckX - clientX); //Paddle Hit
         else punktServer();
       } else {  //Server Seite
-        if (puckX > (serverX - (game.paddleWidth/2)) && puckX < (serverX + (game.paddleWidth/2))) richtungFlipHorizontal(puckX-clientX); //Paddle Hit
+        if (puckX > (serverX - (game.paddleWidth / 2)) && puckX < (serverX + (game.paddleWidth / 2)))
+          richtungFlipHorizontal(puckX - clientX); //Paddle Hit
         else punktClient();
       }
+      if (Math.abs(puckZ) > game.distance) {
+        if (!(puckX > serverX - (game.paddleWidth / 2) && puckZ < (serverX + (game.paddleWidth / 2)))) punktClient();
+        else if (!(puckX > clientX - (game.paddleWidth / 2) && puckZ < (clientX + (game.paddleWidth / 2))))
+          punktServer();
+        else richtungFlipHorizontal();  //Paddle Hit
+      } else if (Math.abs(puckX) > Game.BREITE - Game.WAND_BREITE / 2 - Game.PUCK_RADIUS)
+        richtungFlipVertikal(); //Wall Hit
     }
-    else if (Math.abs(puckX) > Game.BREITE - Game.WAND_BREITE / 2 - Game.PUCK_RADIUS) richtungFlipVertikal(); //Wall Hit
   }
 
-  void richtungFlipHorizontal(double x){
+  void richtungFlipHorizontal(double x) {
     puckRichtung.z = puckRichtung.gibZ() * -1;
     System.out.println(x);
+  }
+  void richtungFlipHorizontal(){
+    puckRichtung.z = puckRichtung.gibZ() * -1;
   }
 
   void richtungFlipVertikal(){
@@ -140,11 +151,13 @@ public class Main {
   void punktServer(){
     setPuck(0,0);
     richtungFlipHorizontal(0);
+    richtungFlipHorizontal();
   }
 
   void punktClient(){
     setPuck(0,0);
     richtungFlipHorizontal(0);
+    richtungFlipHorizontal();
   }
 
   void startGame() {

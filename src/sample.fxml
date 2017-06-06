@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="639.0" prefWidth="849.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="639.0" prefWidth="849.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
    <children>
       <JFXButton fx:id="btnStarten" layoutX="593.0" layoutY="504.0" prefHeight="92.0" prefWidth="211.0" style="-fx-background-color: #49AAC4;" text="Starten">
          <font>
@@ -36,7 +36,7 @@
                   <Font size="15.0" />
                </font>
             </JFXTextField>
-            <JFXButton fx:id="btnVerbinden" layoutX="10.0" layoutY="195.0" prefHeight="69.0" prefWidth="175.0" style="-fx-background-color: #49AAC4;" text="Verbinden">
+            <JFXButton fx:id="btnVerbinden" layoutX="10.0" layoutY="195.0" onAction="#btnStartenActionPerformed" prefHeight="69.0" prefWidth="175.0" style="-fx-background-color: #49AAC4;" text="Verbinden">
                <font>
                   <Font size="15.0" />
                </font>
