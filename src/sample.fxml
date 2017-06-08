@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="639.0" prefWidth="849.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="639.0" prefWidth="849.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
    <children>
       <JFXButton fx:id="btnStarten" layoutX="593.0" layoutY="504.0" onAction="#btnVerbindenActionPerformed" prefHeight="92.0" prefWidth="211.0" style="-fx-background-color: #49AAC4;" text="Starten">
          <font>
@@ -52,7 +52,7 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <JFXRadioButton fx:id="radioHost" layoutX="77.0" layoutY="21.0" prefHeight="54.0" prefWidth="97.0" text="Host">
+            <JFXRadioButton fx:id="radioHost" layoutX="77.0" layoutY="21.0" onAction="#radioHostStateChanged" prefHeight="54.0" prefWidth="97.0" text="Host">
                <font>
                   <Font size="15.0" />
                </font>
@@ -60,7 +60,7 @@
                   <ToggleGroup fx:id="radioButtonVerbinden" />
                </toggleGroup>
             </JFXRadioButton>
-            <JFXRadioButton fx:id="radioClient" layoutX="193.0" layoutY="29.0" prefHeight="39.0" prefWidth="118.0" text="Client" toggleGroup="$radioButtonVerbinden">
+            <JFXRadioButton fx:id="radioClient" layoutX="193.0" layoutY="29.0" onAction="#radioClientStateChanged" prefHeight="39.0" prefWidth="118.0" text="Client" toggleGroup="$radioButtonVerbinden">
                <font>
                   <Font size="15.0" />
                </font>
