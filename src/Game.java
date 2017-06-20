@@ -51,6 +51,7 @@ public class Game{
     GLQuader wandLinks;
     GLQuader wandRechts;
 
+    GLTafel spieltafel;
     //Spielobjekte
     GLQuader paddleServer;
     GLQuader paddleClient;
@@ -98,7 +99,9 @@ public class Game{
         puck.drehe(90,0,0);
 
         this.wandLinks = new GLQuader(BREITE * -1, 0, 0, WAND_BREITE, 10, distance * 2);
-        this.wandRechts = new GLQuader(BREITE, 0, 0, 10, WAND_BREITE, distance * 2);
+        this.wandRechts = new GLQuader(BREITE, 0, 0, WAND_BREITE, 10, distance * 2);
+        spieltafel = new GLTafel(-500,0,0,100,100);
+        spieltafel.setzeText("Hallo", 11);
     }
 
     public void refreshPos(){
@@ -107,6 +110,10 @@ public class Game{
         puck.setzePosition(main.puckX, puck.gibY(), main.puckZ);
         wandLinks.setzePosition(BREITE * -1, 0,0);
         wandRechts.setzePosition(BREITE, 0, 0);
+        spieltafel.setzePosition(-500,0,0);
+        spieltafel.setzeText("Hallo", 11);
+
+
     }
 
     public void setCamera(double[] coord){
