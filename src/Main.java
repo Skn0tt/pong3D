@@ -18,6 +18,8 @@ public class Main {
   GLVektor puckRichtung = new GLVektor(Math.random() * 0.6,0,- 1);
   double speed = 4;
 
+  public static final double MAX_ANGLE = 75;
+
   //Game
   Game game;
 
@@ -29,9 +31,10 @@ public class Main {
     gui = new GUI(this);
     gui.setVisible(true);
     */
-
+    ///*
     Controller controller = new Controller();
     controller.show();
+    //*/
   }
 
   //Server erzeugen
@@ -95,12 +98,18 @@ public class Main {
   void checkCollision() {
     if (Math.abs(puckZ) > game.distance - (game.paddleDepth / 2) - (Game.PUCK_RADIUS / 2)) {  //Prüft ob auf höhe der linie
       if (puckZ > 0) { //Client Seite
-        if (puckX > (clientX - (game.paddleWidth / 2)) && puckX < (clientX + (game.paddleWidth / 2)))
-          richtungFlipHorizontal(puckX - clientX); //Paddle Hit
+        if (puckX > (clientX - (game.paddleWidth / 2)) && puckX < (clientX + (game.paddleWidth / 2))) {
+          double yIntersect = puckX - clientX;
+          double normalized = (yIntersect/(game.paddleWidth/2));
+          richtungFlipHorizontal(normalized); //Paddle Hit
+        }
         else punktServer();
       } else {  //Server Seite
-        if (puckX > (serverX - (game.paddleWidth / 2)) && puckX < (serverX + (game.paddleWidth / 2)))
-          richtungFlipHorizontal(puckX - clientX); //Paddle Hit
+        if (puckX > (serverX - (game.paddleWidth / 2)) && puckX < (serverX + (game.paddleWidth / 2))) {
+          double yIntersect = puckX - serverX;
+          double normalized = (yIntersect/(game.paddleWidth/2));
+          richtungFlipHorizontal(normalized); //Paddle Hit
+        }
         else punktClient();
       }
       if (Math.abs(puckZ) > game.distance) {
@@ -114,7 +123,9 @@ public class Main {
   }
 
   void richtungFlipHorizontal(double x) {
-    puckRichtung.z = puckRichtung.gibZ() * -1;
+    double bounceAngle = x * MAX_ANGLE;
+    puckRichtung.z = Math.cos(bounceAngle);
+    puckRichtung.x = Math.sin(bounceAngle) * -1;
     System.out.println(x);
   }
   void richtungFlipHorizontal(){

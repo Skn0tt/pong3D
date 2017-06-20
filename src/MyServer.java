@@ -9,6 +9,7 @@ public class MyServer extends Server{
   @Override
   public void processNewConnection(String clientIP, int clientPort){
     main.gui.setConnection(true);
+    //TODO: Auf Controller ändern (auch bei processCLosingConnection (Methode))
 
     String s = "2;" + main.gui.getIp();
     send(clientIP, clientPort, s);

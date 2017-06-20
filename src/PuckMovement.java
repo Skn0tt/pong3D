@@ -1,5 +1,4 @@
 import GLOOP.GLVektor;
-import com.sun.istack.internal.NotNull;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -12,7 +11,7 @@ public class PuckMovement extends Thread {
 
     int tickrate = 128;
 
-    public PuckMovement(@NotNull Main main){
+    public PuckMovement(Main main){
         this.main = main;
     }
 

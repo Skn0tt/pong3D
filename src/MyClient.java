@@ -9,7 +9,7 @@ public class MyClient extends Client{
   @Override
   public void processMessage(String msg){
     String[] s = msg.split(";");
-
+    //TODO: Auf Controller ändern
     switch(s[0]) {
       case "0":
         main.setPuck(Double.parseDouble(s[1]), Double.parseDouble(s[2]));

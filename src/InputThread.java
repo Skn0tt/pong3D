@@ -1,5 +1,4 @@
 import GLOOP.GLTastatur;
-import com.sun.istack.internal.NotNull;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -14,7 +13,7 @@ public class InputThread extends Thread{
 
     Main main;
 
-    public InputThread(@NotNull Main main){
+    public InputThread(Main main){
         this.main = main;
     }
 
