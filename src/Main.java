@@ -27,14 +27,14 @@ public class Main {
   GUI gui;
 
   public Main() {
-    /*
+    ///*
     gui = new GUI(this);
     gui.setVisible(true);
-    */
-    ///*
+    //*/
+    /*
     Controller controller = new Controller();
     controller.show();
-    //*/
+    */
   }
 
   //Server erzeugen
@@ -96,6 +96,10 @@ public class Main {
   }
 
   void checkCollision() {
+    /**
+     * Kollision Jan
+     */
+    ///*
     if (Math.abs(puckZ) > game.distance - (game.paddleDepth / 2) - (Game.PUCK_RADIUS / 2)) {  //Prüft ob auf höhe der linie
       if (puckZ > 0) { //Client Seite
         if (puckX > (clientX - (game.paddleWidth / 2)) && puckX < (clientX + (game.paddleWidth / 2))) {
@@ -120,13 +124,30 @@ public class Main {
       } else if (Math.abs(puckX) > Game.BREITE - Game.WAND_BREITE / 2 - Game.PUCK_RADIUS)
         richtungFlipVertikal(); //Wall Hit
     }
+    //*/
+
+    /**
+     * Kollision Simon
+     */
+    /*
+    if (Math.abs(puckZ) > game.distance - (game.paddleDepth / 2) - (Game.PUCK_RADIUS / 2)) {  //Prüft ob auf höhe der linie
+      if (puckZ > 0){ //Client Seite
+        if (puckX > (clientX - (game.paddleWidth/2)) && puckX < (clientX + (game.paddleWidth/2))) richtungFlipHorizontal(puckX-clientX); //Paddle Hit
+        else punktServer();
+      } else {  //Server Seite
+        if (puckX > (serverX - (game.paddleWidth/2)) && puckX < (serverX + (game.paddleWidth/2))) richtungFlipHorizontal(puckX-clientX); //Paddle Hit
+        else punktClient();
+      }
+    }
+    else if (Math.abs(puckX) > Game.BREITE - Game.WAND_BREITE / 2 - Game.PUCK_RADIUS) richtungFlipVertikal(); //Wall Hit
+    */
   }
 
   void richtungFlipHorizontal(double x) {
     double bounceAngle = x * MAX_ANGLE;
     puckRichtung.z = Math.cos(bounceAngle);
     puckRichtung.x = Math.sin(bounceAngle) * -1;
-    System.out.println(x);
+    //System.out.println(x);
   }
   void richtungFlipHorizontal(){
     puckRichtung.z = puckRichtung.gibZ() * -1;
