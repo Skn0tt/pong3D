@@ -1,5 +1,11 @@
+import javafx.util.Pair;
+
+import java.util.ArrayList;
+
 public class MyServer extends Server{
   Main main;
+
+  ArrayList<Pair<String, Integer>> clientList = new ArrayList<Pair<String, Integer>>();
 
   public MyServer(int port, Main main){
     super(port);
@@ -11,6 +17,7 @@ public class MyServer extends Server{
     main.gui.setConnection(true);
     //TODO: Auf Controller ändern (auch bei processCLosingConnection (Methode))
 
+    clientList.add(new Pair<String, Integer>(clientIP, clientPort));
     String s = "2;" + main.gui.getIp();
     send(clientIP, clientPort, s);
   }
@@ -26,6 +33,8 @@ public class MyServer extends Server{
         main.setClient(Double.parseDouble(s[4]));
         break;
     }
+
+    System.out.println(msg);
   }
 
   @Override
@@ -42,4 +51,10 @@ public class MyServer extends Server{
     sendToAll("1;");
   }
 
+  @Override
+  public void sendToAll(String pMessage) {
+    for (Pair<String, Integer> p : clientList){
+      send(p.getKey(), p.getValue(), pMessage);
+    }
+  }
 }

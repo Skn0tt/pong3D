@@ -53,7 +53,6 @@ public class Controller extends Application{
 
 
     //Events
-
     public void btnStartenActionPerformed() {
         if(main.server == null) main.createServer(main.STANDARD_PORT);
         main.startGame();

@@ -23,6 +23,8 @@ public class MyClient extends Client{
         main.gui.setVerbunden(true, s[1]);
         break;
     }
+
+    System.out.println(msg);
   }
 
   void sendPos(){

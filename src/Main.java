@@ -58,13 +58,14 @@ public class Main {
     this.puckX = x;
     this.puckZ = z;
     game.refreshPos();
+    checkCollision();
   }
 
   void setServer(double x){
     if (x > (Game.BREITE * -1) + (game.paddleWidth / 2) && x < (Game.BREITE) - (game.paddleWidth / 2)) {
       this.serverX = x;
       game.refreshPos();
-      publishPositions();
+      checkCollision();
     }
   }
 
@@ -72,7 +73,7 @@ public class Main {
     if (x > (Game.BREITE * -1) + (game.paddleWidth / 2) && x < (Game.BREITE) - (game.paddleWidth / 2)){
       this.clientX = x;
       game.refreshPos();
-      publishPositions();
+      checkCollision();
     }
   }
 
@@ -83,16 +84,12 @@ public class Main {
     else{
       setClient(clientX + x * -1);
     }
+
+    publishPositions();
   }
 
   void movePuck(){
-    puckX += puckRichtung.x * speed;
-    puckZ += puckRichtung.z * speed;
-
-    checkCollision();
-
-    game.refreshPos();
-    publishPositions();
+    setPuck(puckX + puckRichtung.x * speed, puckZ + puckRichtung.z * speed);
   }
 
   void checkCollision() {
@@ -182,14 +179,16 @@ public class Main {
 
   void punktServer(){
     setPuck(0,0);
-    richtungFlipHorizontal(0);
-    richtungFlipHorizontal();
+    publishPositions();
+    //richtungFlipHorizontal(0);
+    //richtungFlipHorizontal();
   }
 
   void punktClient(){
     setPuck(0,0);
-    richtungFlipHorizontal(0);
-    richtungFlipHorizontal();
+    publishPositions();
+    //richtungFlipHorizontal(0);
+    //richtungFlipHorizontal();
   }
 
   void startGame() {
