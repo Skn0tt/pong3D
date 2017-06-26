@@ -7,20 +7,24 @@ public class Ende extends JDialog {
     private JButton buttonOK;
     private JLabel lblAusgabe;
 
-    public Ende() {
+    private Game game;
+
+    public Ende(String text, Game pGame) {
+        this.game = pGame;
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
-
+        lblAusgabe.setText(text);
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onOK();
             }
+
         });
     }
 
     private void onOK() {
-        // add your code here
+        game.beenden();
         dispose();
     }
 /*

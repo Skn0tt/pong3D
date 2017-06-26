@@ -21,7 +21,7 @@ public class Main {
   public static final double MAX_ANGLE = 75;
 
   //Game
-  Game game;
+  public Game game;
 
   //GUI
   GUI gui;
@@ -91,14 +91,20 @@ public class Main {
   void movePuck(){
     setPuck(puckX + puckRichtung.x * speed, puckZ + puckRichtung.z * speed);
     setClient(puckX);
+    game.spielAbbruch();
+
   }
 
   void checkCollision() {
     /**
      * Kollision Jan
      */
+
     ///*
     //Paddle Collision
+
+    /*
+
     if (Math.abs(puckZ) > game.distance - (game.paddleDepth / 2) - (Game.PUCK_RADIUS / 2)) {  //Prüft ob auf höhe der linie
       if (puckZ > 0) { //Client Seite
         if (puckX > (clientX - (game.paddleWidth / 2)) && puckX < (clientX + (game.paddleWidth / 2))) {
@@ -124,16 +130,19 @@ public class Main {
         richtungFlipVertikal(); //Wall Hit
     }
 
+
     //Wall Collision
     if (Math.abs(puckX) > (Game.BREITE - Game.WAND_BREITE / 2) - Game.PUCK_RADIUS){
       richtungFlipVertikal();
     }
     //*/
+    //*/
+
 
     /**
      * Kollision Simon
      */
-    /*
+    ///*
     if (Math.abs(puckZ) > game.distance - (game.paddleDepth / 2) - (Game.PUCK_RADIUS / 2)) {  //Prüft ob auf höhe der linie
       if (puckZ > 0){ //Client Seite
         if (puckX > (clientX - (game.paddleWidth/2)) && puckX < (clientX + (game.paddleWidth/2))) richtungFlipHorizontal(puckX-clientX); //Paddle Hit
@@ -144,7 +153,7 @@ public class Main {
       }
     }
     else if (Math.abs(puckX) > Game.BREITE - Game.WAND_BREITE / 2 - Game.PUCK_RADIUS) richtungFlipVertikal(); //Wall Hit
-    */
+    //*/
   }
 
   void richtungFlipHorizontal(double x) {
@@ -200,5 +209,19 @@ public class Main {
 
   void startGame() {
     startGame(Game.PADDLE_A);
+  }
+
+  public void guiBeenden( int punktHost, int punktClient) {
+    if (punktHost > 5){
+      Ende dialog = new Ende("Host gewinnt. ", game );
+      dialog.pack();
+      dialog.setVisible(true);
+    }
+    if(punktClient > 5){
+      Ende dialog = new Ende("Client gewinnt", game);
+      dialog.pack();
+      dialog.setVisible(true);
+    }
+
   }
 }

@@ -22,6 +22,7 @@ public class GUI extends javax.swing.JFrame {
     public GUI(Main main) {
         this.main = main;
         initComponents();
+
     }
 
     /**
@@ -231,7 +232,10 @@ public class GUI extends javax.swing.JFrame {
         if (b) lblVerbunden.setText("Verbunden mit " + ip);
         else lblVerbunden.setText("Nicht Verbunden");
     }
-    
+
+
+
+
     /**
      * @param args the command line arguments
      */

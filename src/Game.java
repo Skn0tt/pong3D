@@ -36,6 +36,11 @@ public class Game{
 
     Main main;
 
+    //Punkte
+    public int punktClient = 0, punktHost = 0;
+    private String textTafel;
+
+
     //Input
     GLTastatur tastatur;
     Thread inputThread;
@@ -51,7 +56,8 @@ public class Game{
     GLQuader wandLinks;
     GLQuader wandRechts;
 
-    GLTafel spieltafel;
+    GLTafel tafel[] = new GLTafel[2];
+
     //Spielobjekte
     GLQuader paddleServer;
     GLQuader paddleClient;
@@ -100,8 +106,14 @@ public class Game{
 
         this.wandLinks = new GLQuader(BREITE * -1, 0, 0, WAND_BREITE, 10, distance * 2);
         this.wandRechts = new GLQuader(BREITE, 0, 0, WAND_BREITE, 10, distance * 2);
-        spieltafel = new GLTafel(-500,0,0,100,100);
-        spieltafel.setzeText("Hallo", 11);
+
+        tafel[0] = new GLTafel(-500,0,0,100,100); //Client
+        tafel[1] = new GLTafel(500,0,0,100,100); //Host
+        tafel[1].drehe(0,180,0);
+
+
+
+
     }
 
     public void refreshPos(){
@@ -110,8 +122,10 @@ public class Game{
         puck.setzePosition(main.puckX, puck.gibY(), main.puckZ);
         wandLinks.setzePosition(BREITE * -1, 0,0);
         wandRechts.setzePosition(BREITE, 0, 0);
-        spieltafel.setzePosition(-500,0,0);
-        spieltafel.setzeText("Hallo", 11);
+
+        tafel[0].setzePosition(-500,0,0); //Client
+        tafel[1].setzePosition(500,0,0); //Host
+        tafel[1].drehe(0,180,0);
 
 
     }
@@ -142,5 +156,27 @@ public class Game{
 
         paddleClient.setzePosition(paddleClient.gibX(), paddleClient.gibY(), z / 2);
         paddleServer.setzePosition(paddleServer.gibX(), paddleServer.gibY(), z / 2 * -1);
+    }
+    public void spielAbbruch(){
+
+
+        if(puck.gibZ()>500){
+            punktHost++;
+            main.punktServer();
+        }
+        if(puck.gibZ()<-500){
+            punktClient++;
+            main.punktClient();
+        }
+        textTafel = "Client: " + punktClient +"\nHost: " + punktHost;
+        for(int i = 0; i<2; i++) {tafel[i].setzeText(textTafel, 16);}
+
+        main.guiBeenden(punktHost, punktClient);
+
+
+    }
+    public void beenden() {
+        Sys.beenden();
+
     }
 }
