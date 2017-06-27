@@ -58,14 +58,14 @@ public class Main {
     this.puckX = x;
     this.puckZ = z;
     game.refreshPos();
-    checkCollision();
+    //checkCollision();
   }
 
   void setServer(double x){
     if (x > (Game.BREITE * -1) + (game.paddleWidth / 2) && x < (Game.BREITE) - (game.paddleWidth / 2)) {
       this.serverX = x;
       game.refreshPos();
-      checkCollision();
+      //checkCollision();
     }
   }
 
@@ -73,7 +73,7 @@ public class Main {
     if (x > (Game.BREITE * -1) + (game.paddleWidth / 2) && x < (Game.BREITE) - (game.paddleWidth / 2)){
       this.clientX = x;
       game.refreshPos();
-      checkCollision();
+      //checkCollision();
     }
   }
 
@@ -85,12 +85,15 @@ public class Main {
       setClient(clientX + x * -1);
     }
 
+    checkCollision();
     publishPositions();
   }
 
   void movePuck(){
     setPuck(puckX + puckRichtung.x * speed, puckZ + puckRichtung.z * speed);
-    setClient(puckX);
+    //setClient(puckX);
+    checkCollision();
+    publishPositions();
   }
 
   void checkCollision() {
@@ -99,35 +102,31 @@ public class Main {
      */
     ///*
     //Paddle Collision
-    if (Math.abs(puckZ) > game.distance - (game.paddleDepth / 2) - (Game.PUCK_RADIUS / 2)) {  //Prüft ob auf höhe der linie
+    if (Math.abs(puckZ) >= game.distance - (game.paddleDepth / 2) - Game.PUCK_RADIUS) {  //Prüft ob auf höhe der TorLinie
       if (puckZ > 0) { //Client Seite
-        if (puckX > (clientX - (game.paddleWidth / 2)) && puckX < (clientX + (game.paddleWidth / 2))) {
+        if (puckX > (clientX - (game.paddleWidth / 2)) && puckX < (clientX + (game.paddleWidth / 2))) { //Prüft ob zwischen Enden des Paddles
           double yIntersect = puckX - clientX;
           double normalized = (yIntersect/(game.paddleWidth/2));
           richtungFlipHorizontal(normalized); //Paddle Hit
+          //richtungFlipHorizontal();
         }
         else punktServer();
       } else {  //Server Seite
-        if (puckX > (serverX - (game.paddleWidth / 2)) && puckX < (serverX + (game.paddleWidth / 2))) {
+        if (puckX > (serverX - (game.paddleWidth / 2)) && puckX < (serverX + (game.paddleWidth / 2))) { //Prüft ob zwischen Enden des Paddles
           double yIntersect = puckX - serverX;
           double normalized = (yIntersect/(game.paddleWidth/2));
           richtungFlipHorizontal(normalized); //Paddle Hit
+          //richtungFlipHorizontal();
         }
         else punktClient();
       }
-      if (Math.abs(puckZ) > game.distance) {
-        if (!(puckX > serverX - (game.paddleWidth / 2) && puckZ < (serverX + (game.paddleWidth / 2)))) punktClient();
-        else if (!(puckX > clientX - (game.paddleWidth / 2) && puckZ < (clientX + (game.paddleWidth / 2))))
-          punktServer();
-        else richtungFlipHorizontal();  //Paddle Hit
-      } else if (Math.abs(puckX) > Game.BREITE - Game.WAND_BREITE / 2 - Game.PUCK_RADIUS)
-        richtungFlipVertikal(); //Wall Hit
     }
-
     //Wall Collision
-    if (Math.abs(puckX) > (Game.BREITE - Game.WAND_BREITE / 2) - Game.PUCK_RADIUS){
+    else if (Math.abs(puckX) > (Game.BREITE - Game.WAND_BREITE / 2) - Game.PUCK_RADIUS){
       richtungFlipVertikal();
     }
+
+    if (Math.abs(puckZ) > game.distance) setPuck(0,0);
     //*/
 
     /**
@@ -159,7 +158,6 @@ public class Main {
 
   void richtungFlipVertikal(){
     puckRichtung.x = puckRichtung.gibX() * -1;
-
   }
 
   void publishPositions(){
@@ -187,15 +185,15 @@ public class Main {
   void punktServer(){
     setPuck(0,0);
     publishPositions();
-    //richtungFlipHorizontal(0);
-    richtungFlipHorizontal();
+    checkCollision();
+    richtungFlipHorizontal(0);
   }
 
   void punktClient(){
     setPuck(0,0);
     publishPositions();
-    //richtungFlipHorizontal(0);
-    richtungFlipHorizontal();
+    checkCollision();
+    richtungFlipHorizontal(0);
   }
 
   void startGame() {

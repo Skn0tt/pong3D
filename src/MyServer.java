@@ -1,6 +1,8 @@
 import javafx.util.Pair;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MyServer extends Server{
   Main main;
@@ -31,6 +33,7 @@ public class MyServer extends Server{
         main.setPuck(Double.parseDouble(s[1]), Double.parseDouble(s[2]));
         main.setServer(Double.parseDouble(s[3]));
         main.setClient(Double.parseDouble(s[4]));
+        main.checkCollision();
         break;
     }
 
